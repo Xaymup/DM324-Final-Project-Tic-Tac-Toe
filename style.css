@@ -1,0 +1,12 @@
+html {
+  background-color: #1A1A1A;
+}
+body {
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  width: 100px;
+  height: 100px;
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
