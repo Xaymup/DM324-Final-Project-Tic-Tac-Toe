@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Monoton&display=swap');
 html {
   background-color: #1A1A1A;
 }
 body {
+  font-family: 'Monoton', cursive;
+  text-align: center;
+  font-size: 48px;
   background-color: #FFFFFF;
   border-radius: 15px;
   width: 500px;
