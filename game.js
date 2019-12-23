@@ -2,6 +2,8 @@ var canvasElementId = 'game';
 var canvas = document.getElementById(canvasElementId);
 var ctx = canvas.getContext('2d');
 
+ctx.font = '150px Indie Flower';
+
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
 const squareLength = canvasWidth / 3;
@@ -33,8 +35,7 @@ function addPiece (mouse) {
     }
 
 function drawShit (xCordinate, yCordinate) {
-    ctx.strokeStyle = '#000000';
-    ctx.fillRect(xCordinate, yCordinate, squareLength, squareLength);
+    ctx.fillText("X", xCordinate, yCordinate + squareLength, squareLength);
 }
 
 function getCanvasMousePosition (event) {
