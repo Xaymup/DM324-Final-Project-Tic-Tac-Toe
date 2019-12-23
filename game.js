@@ -8,6 +8,8 @@ const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
 const squareLength = canvasWidth / 3;
 
+var turn = 0;
+
 function drawGrid () {
     ctx.strokeStyle = '#000000';
     ctx.strokeRect(squareLength, 0, squareLength, canvasHeight);
@@ -35,7 +37,14 @@ function addPiece (mouse) {
     }
 
 function drawShit (xCordinate, yCordinate) {
-    ctx.fillText("X", xCordinate, yCordinate + squareLength, squareLength);
+  if (turn == 0){
+    ctx.fillText("X", xCordinate + 10, yCordinate + squareLength - 10, squareLength);
+    turn = 1;
+  }
+  else {
+    ctx.fillText("O", xCordinate + 10, yCordinate + squareLength - 10, squareLength);
+    turn = 0;
+  }
 }
 
 function getCanvasMousePosition (event) {
@@ -47,8 +56,8 @@ function getCanvasMousePosition (event) {
   }
 }
 drawGrid();
-
 canvas.addEventListener('mouseup', function (event) {
   var canvasMousePosition = getCanvasMousePosition(event);
   addPiece(canvasMousePosition);
+  takeTurn();
 });
