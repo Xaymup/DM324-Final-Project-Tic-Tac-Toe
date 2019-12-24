@@ -14,7 +14,7 @@ var step = 0;
 var xPlaces = [];
 var oPlaces = [];
 
-var winningConditions = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
+var winningConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 5, 6]];
 
 function drawGrid () {
     ctx.strokeStyle = '#000000';
@@ -40,12 +40,34 @@ function addPiece (mouse) {
           }
         }
     }
-    checkWin();
 }
 
+function getCol(matrix, col){
+   var column = [];
+   for(var i=0; i<3; i++){
+     column.push(matrix[col][i]);
+   }
+   return column;
+}
+
+function arraysEqual(a, b) {
+  if (a === b) return true;
+  if (a == null || b == null) return false;
+  if (a.length != b.length) return false;
+  for (var i = 0; i < a.length; ++i) {
+    if (a[i] !== b[i]) return false;
+  }
+  return true;
+}
 function checkWin(){
-  for (let i = 0;i<=8;i++){
-    if ()
+  for (var i = 0;i<8;i++) {
+    var winSeq = getCol(winningConditions ,i);
+    if (arraysEqual(xPlaces.sort(),winSeq)){
+      alert("X wins!");
+    }
+    if (arraysEqual(oPlaces.sort(),winSeq)){
+      alert("O wins!");
+    }
   }
 }
 
@@ -63,6 +85,7 @@ function drawShit (xCordinate, yCordinate) {
     oPlaces.push(position);
   }
   }
+  checkWin();
 }
 
 function getCanvasMousePosition (event) {
@@ -77,5 +100,4 @@ drawGrid();
 canvas.addEventListener('mouseup', function (event) {
   var canvasMousePosition = getCanvasMousePosition(event);
   addPiece(canvasMousePosition);
-  takeTurn();
 });
