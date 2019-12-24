@@ -14,6 +14,7 @@ var step = 0;
 var xPlaces = [];
 var oPlaces = [];
 
+var gameState = 1;
 var winningConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
 function drawGrid () {
@@ -54,19 +55,22 @@ function checkWin(){
     var s = getCol(winningConditions ,i)
     if (xPlaces.includes(s[0]) && xPlaces.includes(s[1]) && xPlaces.includes(s[2])){
       fancyPrompt("X wins!");
+      gameState = "0";
     }
     if (oPlaces.includes(s[0]) && oPlaces.includes(s[1]) && oPlaces.includes(s[2])){
       fancyPrompt("O wins!");
+      gameState = "0";
     }
   }
   if (step == 9){
-    fancyPrompt("It's a tie!")
+    fancyPrompt("It's a tie!");
+    gameState = "0";
   }
 }
 
 function drawShit (xCordinate, yCordinate) {
   position = (yCordinate/100 * 3 + xCordinate/100);
-  if (!(xPlaces+oPlaces).includes(position)){
+  if (!(xPlaces+oPlaces).includes(position) && gameState != 0){
       step = step + 1;
   if (turn == 0){
     ctx.fillText("X", xCordinate + 10, yCordinate + squareLength - 10, squareLength);
@@ -78,21 +82,19 @@ function drawShit (xCordinate, yCordinate) {
     turn = 0;
     oPlaces.push(position);
   }
-  }
   checkWin();
+  }
 }
 
 function fancyPrompt(message) {
   const div = document.createElement('div');
   div.className = 'notif';
-  div.innerHTML = "<p>"+message+', <a href="#" onclick="reloadBody();">rematch?"</a></p>';
+  div.innerHTML = "<p>"+message+' <a href="#" onclick="reloadBody();">rematch?</a></p>';
   document.getElementById('main').appendChild(div);
 }
 
 function reloadBody(){
-    var container = document.getElementById("game");
-    var content = container.innerHTML;
-    container.innerHTML= content;
+location.reload(true);
 }
 function getCanvasMousePosition (event) {
   var rect = canvas.getBoundingClientRect();
