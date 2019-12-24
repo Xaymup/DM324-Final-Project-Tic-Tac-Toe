@@ -8,13 +8,13 @@ const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
 const squareLength = canvasWidth / 3;
 
-var turn = 0;
+var turn = Math.round(Math.random());
 var step = 0;
 
 var xPlaces = [];
 var oPlaces = [];
 
-var winningConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 5, 6]];
+var winningConditions = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
 function drawGrid () {
     ctx.strokeStyle = '#000000';
@@ -50,24 +50,18 @@ function getCol(matrix, col){
    return column;
 }
 
-function arraysEqual(a, b) {
-  if (a === b) return true;
-  if (a == null || b == null) return false;
-  if (a.length != b.length) return false;
-  for (var i = 0; i < a.length; ++i) {
-    if (a[i] !== b[i]) return false;
-  }
-  return true;
-}
 function checkWin(){
   for (var i = 0;i<8;i++) {
-    var winSeq = getCol(winningConditions ,i);
-    if (arraysEqual(xPlaces.sort(),winSeq)){
+    var s = getCol(winningConditions ,i)
+    if (xPlaces.includes(s[0]) && xPlaces.includes(s[1]) && xPlaces.includes(s[2])){
       alert("X wins!");
     }
-    if (arraysEqual(oPlaces.sort(),winSeq)){
+    if (oPlaces.includes(s[0]) && oPlaces.includes(s[1]) && oPlaces.includes(s[2])){
       alert("O wins!");
     }
+  }
+  if (step == 9){
+    alert("It's a tie!")
   }
 }
 
