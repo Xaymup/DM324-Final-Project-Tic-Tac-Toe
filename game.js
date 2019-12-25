@@ -40,6 +40,12 @@ function addPiece (mouse) {
           }
         }
     }
+    doTurn();
+}
+
+function positionToCordinates(position){
+  var pToCor = [[0,0],[100,0],[200,0],[0,100],[100,100],[200,100],[0,200],[100,200],[200,200]];
+  return pToCor[position];
 }
 
 function getCol(matrix, col){
@@ -86,6 +92,16 @@ function drawShit (xCordinate, yCordinate) {
   }
 }
 
+function doTurn (){
+  randPos = Math.floor(Math.random() * 9);
+  if (!xPlaces.includes(randPos) && !oPlaces.includes(randPos)){
+    drawShit(positionToCordinates(randPos)[0],positionToCordinates(randPos)[1]);
+  }
+  else {
+    doTurn();
+  }
+}
+
 function fancyPrompt(message) {
   const div = document.createElement('div');
   div.className = 'notif';
@@ -104,8 +120,10 @@ function getCanvasMousePosition (event) {
     y: event.clientY - rect.top
   }
 }
+
 drawGrid();
 canvas.addEventListener('mouseup', function (event) {
   var canvasMousePosition = getCanvasMousePosition(event);
   addPiece(canvasMousePosition);
+
 });
