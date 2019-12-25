@@ -93,12 +93,15 @@ function drawShit (xCordinate, yCordinate) {
 }
 
 function doTurn (){
+
   randPos = Math.floor(Math.random() * 9);
   if (!xPlaces.includes(randPos) && !oPlaces.includes(randPos)){
     drawShit(positionToCordinates(randPos)[0],positionToCordinates(randPos)[1]);
   }
   else {
-    doTurn();
+    if (step != 9){
+      doTurn();
+    }
   }
 }
 
